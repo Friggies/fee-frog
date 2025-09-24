@@ -20,7 +20,10 @@ export default function RootLayout() {
               }}
             >
               <Stack.Screen name='index' options={{ title: 'Subscriptions' }} />
-              <Stack.Screen name='edit' options={{ title: 'Subscription' }} />
+              <Stack.Screen
+                name='edit'
+                options={{ title: 'Subscription', headerBackTitle: 'Back' }}
+              />
               {/* Modal group */}
               <Stack.Screen
                 name='(modals)/settings'
