@@ -27,7 +27,7 @@ export function renewsLabel(billingDate?: string | null): string | null {
   if (n === today) return 'Renews today';
   if ((((today + 1 - n) % 31) + 31) % 31 === 1 || n - today === 1)
     return 'Renews tomorrow';
-  return `Renews on ${ordinalDay(n)}`;
+  return `Renews on the ${ordinalDay(n)}`;
 }
 
 export function parseFlexibleNumber(input: string): number {
