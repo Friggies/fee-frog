@@ -28,7 +28,7 @@ export default function SettingsModal() {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.label}>Global valuta</Text>
+        <Text style={styles.label}>Global currency</Text>
         <TextInput
           value={valuta}
           onChangeText={setValuta}
@@ -45,7 +45,7 @@ export default function SettingsModal() {
         </Text>
 
         <Pressable onPress={onSave} style={styles.primaryBtn}>
-          <Text style={styles.btnText}>Update valuta</Text>
+          <Text style={styles.btnText}>Update currency</Text>
         </Pressable>
 
         <Pressable onPress={() => router.back()} style={styles.secondaryBtn}>
