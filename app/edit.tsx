@@ -6,6 +6,7 @@ import { getSubscriptionById } from '@/db/subscriptions';
 import { useAppState } from '@/store/AppState';
 import { SubscriptionForm } from '@/components/SubscriptionForm';
 import { colors } from '@/theme/colors';
+import { parseFlexibleNumber } from '@/utils/format';
 
 type FormState = { name: string; price: string; billingDate: string };
 
@@ -59,9 +60,9 @@ export default function EditScreen() {
       }
     }
 
-    const numericPrice = Number(form.price);
+    const numericPrice = parseFlexibleNumber(form.price);
     if (Number.isNaN(numericPrice) || numericPrice < 0) {
-      Alert.alert('Enter a valid monthly price (e.g., 7.99)');
+      Alert.alert('Enter a valid price (e.g., 7.99 or 7,99)');
       return;
     }
 

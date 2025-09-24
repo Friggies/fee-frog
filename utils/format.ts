@@ -29,3 +29,42 @@ export function renewsLabel(billingDate?: string | null): string | null {
     return 'Renews tomorrow';
   return `Renews on ${ordinalDay(n)}`;
 }
+
+export function parseFlexibleNumber(input: string): number {
+  const t = input.trim().replace(/\s/g, '');
+  if (!t) return NaN;
+
+  const hasComma = t.includes(',');
+  const hasDot = t.includes('.');
+
+  if (hasComma && hasDot) {
+    const lastComma = t.lastIndexOf(',');
+    const lastDot = t.lastIndexOf('.');
+    const decimalSep = lastComma > lastDot ? ',' : '.';
+    const thousandsSep = decimalSep === ',' ? '.' : ',';
+    const normalized = t
+      .replace(new RegExp(`\\${thousandsSep}`, 'g'), '')
+      .replace(decimalSep, '.');
+    return Number(normalized);
+  }
+
+  if (hasComma) return Number(t.replace(',', '.'));
+  return Number(t);
+}
+
+export function normalizeDecimalString(input: string): string {
+  const t = input.trim().replace(/\s/g, '');
+  if (!t) return '';
+  const hasComma = t.includes(',');
+  const hasDot = t.includes('.');
+  if (hasComma && hasDot) {
+    const lastComma = t.lastIndexOf(',');
+    const lastDot = t.lastIndexOf('.');
+    const decimalSep = lastComma > lastDot ? ',' : '.';
+    const thousandsSep = decimalSep === ',' ? '.' : ',';
+    return t
+      .replace(new RegExp(`\\${thousandsSep}`, 'g'), '')
+      .replace(decimalSep, '.');
+  }
+  return hasComma ? t.replace(',', '.') : t;
+}

@@ -7,6 +7,7 @@ import {
   Platform,
 } from 'react-native';
 import { colors } from '@/theme/colors';
+import { normalizeDecimalString } from '@/utils/format';
 
 export function SubscriptionForm({
   values,
@@ -46,7 +47,10 @@ export function SubscriptionForm({
       <Text style={styles.label}>Monthly price</Text>
       <TextInput
         value={values.price}
-        onChangeText={(t) => onChange({ price: t })}
+        onChangeText={(t) => onChange({ price: t.replace(/[^\d.,]/g, '') })}
+        onEndEditing={(e) =>
+          onChange({ price: normalizeDecimalString(e.nativeEvent.text) })
+        }
         placeholder='7.99'
         placeholderTextColor={colors.placeholder}
         keyboardType='decimal-pad'
